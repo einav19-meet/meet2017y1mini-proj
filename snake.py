@@ -8,7 +8,7 @@ SIZE_Y=500
 turtle.setup(SIZE_X,SIZE_Y)
 
 turtle.penup
-SQUARE_SIZE=20
+SQUARE_SIZE=22
 START_LENGTH=6
 turtle.color("#BD2CE1")
 turtle.bgcolor("#010303")
@@ -22,9 +22,9 @@ turtle.penup()
 snake = turtle.clone()
 snake.shape("square")
 
-turtle.register_shape("burger.gif")
+turtle.register_shape("strawbery.gif")
 food= turtle.clone()
-food.shape("burger.gif")
+food.shape("strawbery.gif")
 
 turtle.hideturtle()
 
@@ -82,8 +82,10 @@ def right():
 def make_food():    
     min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
     max_x=int(SIZE_X/2/SQUARE_SIZE)-1
-    min_y=-int(SIZE_Y/2/SQUARE_SIZE)-1
-    max_y=int(SIZE_Y/2/SQUARE_SIZE)+1
+    min_y=-int(SIZE_Y/2/SQUARE_SIZE)+1
+
+    
+    max_y=int(SIZE_Y/2/SQUARE_SIZE)-1
     
     food_x = random.randint(min_x,max_x)*SQUARE_SIZE
     food_y = random.randint(min_y,max_y)*SQUARE_SIZE
@@ -92,6 +94,7 @@ def make_food():
     stamp_id=food.stamp()
     food_stamps.append(stamp_id)
     
+          
     
 def move_snake():
     my_pos = snake.pos()
@@ -123,13 +126,11 @@ def move_snake():
         food_stamps.pop(food_ind)
         print("you have eaten the food! getting BIGGER...")
         make_food()
+    else:
         
-        
-
-    old_stamp=stamp_list.pop(0)
-    snake.clearstamp(old_stamp)
-
-    pos_list.pop(0)
+        old_stamp=stamp_list.pop(0)
+        snake.clearstamp(old_stamp)
+        pos_list.pop(0)
 
     new_pos = snake.pos()
     new_x_pos = new_pos[0]
@@ -138,22 +139,27 @@ def move_snake():
     if new_x_pos >= RIGHT_EDGE:
         print("GAME OVER!!!!!!!!!!")
         quit()
-    if new_x_pos <= LEFT_EDGE:
+    elif new_x_pos <= LEFT_EDGE:
         print("GAME OVER!!!!!!!!!!")
         quit()
-    if new_y_pos >= UP_EDGE:
+    elif new_y_pos >= UP_EDGE:
         print("GAME OVER!!!!!!!!!!")
         quit()
-    if new_y_pos <= DOWN_EDGE:
+    elif new_y_pos <= DOWN_EDGE:
         print("GAME OVER!!!!!!!!!!")
         quit()
-    if new_pos in pos_list[:-1]:
+    elif new_pos in pos_list[:-1]:
         print("GAME OVER!!!!!!!")
         quit()
     
     
 
     turtle.ontimer(move_snake,TIME_STEP)
+
+
+
+             
+    
 
 turtle.onkeypress(up,UP_ARROW)
 turtle.onkeypress(down,DOWN_ARROW)
