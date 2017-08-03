@@ -23,8 +23,13 @@ snake = turtle.clone()
 snake.shape("square")
 
 turtle.register_shape("strawbery.gif")
+turtle.register_shape("wm.gif")
+turtle.register_shape("apple1.gif")
+turtle.register_shape("pie.gif")
+turtle.register_shape("pop.gif")
+
 food= turtle.clone()
-food.shape("strawbery.gif")
+
 
 turtle.hideturtle()
 
@@ -89,10 +94,30 @@ def make_food():
     
     food_x = random.randint(min_x,max_x)*SQUARE_SIZE
     food_y = random.randint(min_y,max_y)*SQUARE_SIZE
+    #food.goto(food_x,food_y)
+    #food_pos.append((food_x, food_y))
+    #stamp_id=food.stamp()
+    #food_stamps.append(stamp_id)
+
+    #generates a random number between 0 and 3
+    r = random.randint(0,4)
+    if r==0:
+        food.shape("wm.gif")
+    elif r==1:
+        food.shape("strawbery.gif")
+    elif r==2:
+        food.shape("apple1.gif")
+    elif r==3:
+        food.shape("pie.gif")
+    elif r==4:
+        food.shape("pop.gif") 
+
+        
     food.goto(food_x,food_y)
     food_pos.append((food_x, food_y))
     stamp_id=food.stamp()
     food_stamps.append(stamp_id)
+        
     
           
     
